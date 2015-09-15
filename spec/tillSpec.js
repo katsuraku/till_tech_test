@@ -53,17 +53,22 @@ describe('Till', function() {
       till.takeOrder(1, 'Tea');
       till.calculateTax();
       till.calculateAfterTaxTotal();
-      expect(till.afterTaxTotal).toEqual(9.13)
+      expect(till.afterTaxTotal).toEqual(9.13);
     });
   });
-  // describe('producing receipt', function() {
-  //   it('produces a receipt in the right format', function() {
-  //     till.takeName('Kirsten');
-  //     till.takeOrder(1, 'Cafe Latte');
-  //     till.takeOrder(1, 'Tirmasu');
-  //     till.takeName('Gerard');
-  //     till.takeOrder(1, 'Cortado');
-  //     expect(till.produceReceipt().toEqual['{names: [Kirsten', 'Gerard'], orders: [], tax: 0, total: });
-  //   });
-  // });
+
+  describe('producing receipt', function() {
+    it('produces a receipt in the right format', function() {
+      till.takeName('Kirsten');
+      till.takeOrder(1, 'Cafe Latte');
+      till.takeOrder(1, 'Tiramisu');
+      till.takeName('Gerard');
+      till.takeOrder(1, 'Cortado');
+      till.calculateTax();
+      till.calculateAfterTaxTotal();
+      expect(till.produceReceipt()).toEqual(
+        {'Names': ['Kirsten', 'Gerard'],
+        'Orders': [[ 'Cafe Latte', 1, 'x ', 4.75 ], [ 'Tiramisu', 1, 'x ', 11.40 ], [ 'Cortado', 1, 'x ', 4.55 ]], 'Tax': 1.79, 'Total': 22.49 });
+    });
+  });
 });

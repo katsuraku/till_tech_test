@@ -24,3 +24,7 @@ Till.prototype.calculateTax = function() {
 Till.prototype.calculateAfterTaxTotal = function() {
   this.afterTaxTotal += +(this.preTaxTotal + this.taxAmount);
 };
+
+Till.prototype.produceReceipt = function() {
+  return {'Names': this.customerNames, 'Orders': this.orders, 'Tax': (this.taxAmount)/1, 'Total': (this.afterTaxTotal)/1};
+};
